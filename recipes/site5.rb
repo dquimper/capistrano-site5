@@ -2,6 +2,7 @@
 # servers (which is the default), you can specify the actual location
 # via the :deploy_to variable:
 set(:deploy_to) { "/home/#{user}/rails/#{application}" }
+set(:public_html) { "/home/#{user}/public_html/#{application}"}
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
@@ -33,6 +34,8 @@ end
 
 namespace :deploy do
   after "deploy:update", "site5:bundle"
+  after "deploy:setup", "site5:setup"
+  after "deploy:check", "site5:check"
 
   desc "Site5 version of restart task."
   task :restart do
@@ -52,7 +55,18 @@ namespace :site5 do
   end
 
   desc "#rake db:migrate RAILS_ENV=production"
-  task :migrate, :soles => :db do
+  task :migrate, :roles => :db do
     #rake db:migrate RAILS_ENV=production
+  end
+
+  desc "Set your public_html to point to your project's public directory"
+  task :setup, :roles => :app do
+    run "if [ -d #{public_html} ]; then if [ ! -L #{public_html} ]; then rm -rf #{public_html} && echo #{public_html} deleted; fi; fi;"
+    run "if [ ! -L #{public_html} ]; then ln -s #{current_path}/public #{public_html} && echo Symlink created for #{public_html}; fi"
+  end
+
+  desc "Check your site5 setup"
+  task :check, :roles => :app do
+    run "test -d #{public_html} && test -L #{public_html}"
   end
 end
