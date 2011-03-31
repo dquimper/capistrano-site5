@@ -10,9 +10,9 @@ Usage
 2. Site5 interface will create a sub-directory in your public_html directory.
 3. Create or modify your config/deploy.rb, the minimum require is:
    > set :application, "tal"
-   > set :repository,  "your git or github url here"
-   > set :user, "your username here"
-   > server "example.com", :app, :web, :db, :primary => true
+set :repository,  "your git or github url here"
+set :user, "your username here"
+server "example.com", :app, :web, :db, :primary => true
 4. $ cap deploy:setup
    If you don't
 4. $ cap deploy:check
