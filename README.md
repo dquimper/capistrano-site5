@@ -9,14 +9,24 @@ Usage
 1. Create a sub-domain for the rails application that you wish to deploy.
 2. Site5 interface will create a sub-directory in your public_html directory.
 3. Create or modify your config/deploy.rb, the minimum require is:
-   > set :application, "tal"
-set :repository,  "your git or github url here"
-set :user, "your username here"
-server "example.com", :app, :web, :db, :primary => true
-4. $ cap deploy:setup
-   If you don't
-4. $ cap deploy:check
-5. $ cap deploy
+
+    `set :application, "myapp"`
+
+    The first part of your sub-domain. ex: For myapp.example.com, you only write myapp
+
+    `set :repository,  "your git or github url"`
+
+    `set :user, "your username on the site5 server."`
+
+    `server "example.com", :app, :web, :db, :primary => true`
+4. If you don't want to use `/home/#{user}/rails/#{application}` for your application location, you may redefine `deploy_to`
+
+    `#set :deploy_to, "/home/#{user}/#{application}.example.com/#{application}"`
+5. `$ cap deploy:setup`
+
+    ....
+4. `$ cap deploy:check``
+5. `$ cap deploy`
 
 Example
 =======
