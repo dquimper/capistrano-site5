@@ -37,13 +37,17 @@ Usage
 
     `set :deploy_to, "/home/#{user}/#{application}.example.com/#{application}"`
 5. Also, my default, Site5 links your sub-domain to `/home/#{user}/public_html/#{application}`. If you wish to modify this behavior:
+
     `set :public_html, "/home/#{user}/#{application}.dansrc.com/public_html"`
 6. `$ cap deploy:setup`
+
     Capistrano will create it's regular deployment structure in your `deploy_to` directory.
     Then it will delete the directory site5 created when you created your domain and replace it with a symlink to your current public directory.
 7. `$ cap deploy:check`
+
     Capistrano will check it's deployement structure (including your symlink to your current public directory.
 8. `$ cap deploy`
+
     Capistrano will deploy your application and restart passenger.
 
 Example
