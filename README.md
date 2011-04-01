@@ -3,8 +3,20 @@ capistrano-site5
 
 This is a simple plugin to deploy on a site5 account.
 
+Installation
+------------
+
+Rails 2.x
+
+`./script/plugin install git@github.com:dquimper/capistrano-site5.git`
+
+Rails 3.x
+
+`rails plugin install git@github.com:dquimper/capistrano-site5.git`
+
+
 Usage
-=====
+-----
 
 1. Create a sub-domain for the rails application that you wish to deploy.
 2. Site5 interface will create a sub-directory in your public_html directory.
@@ -33,5 +45,25 @@ Usage
     Capistrano will check it's deployement structure (including your symlink to your current public directory.
 8. `$ cap deploy`
     Capistrano will deploy your application and restart passenger.
+
+Example
+-------
+
+**deploy.rb**
+
+---
+    set :application, "myapp"
+    set :repository,  "git@github.com:someone/someproject.git"
+    set :user, "username"
+    
+    server "example.com", :app, :web, :db, :primary => true
+    
+    # If you aren't deploying to /home/#{user}/rails/#{application} on the target
+    # servers (which is the default with this capistrano-site5 plugin), you can
+    # specify the actual location via the :deploy_to variable:
+    #set :deploy_to, "/home/#{user}/#{application}.dansrc.com/#{application}"
+    #set :public_html, "/home/#{user}/#{application}.dansrc.com/public_html"
+
+---
 
 Copyright (c) 2011 Daniel Quimper, released under the MIT license
