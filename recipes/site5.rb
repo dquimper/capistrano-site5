@@ -33,6 +33,7 @@ namespace :deploy do
   after "deploy:update", "site5:bundle"
   after "deploy:setup", "site5:setup"
   after "deploy:check", "site5:check"
+  after "deploy:symlink", "site5:htaccess_setup"
 
   desc "Site5 version of restart task."
   task :restart do
@@ -41,6 +42,8 @@ namespace :deploy do
 end
 
 namespace :site5 do
+  after "site5:bundle", "site5:migrate"
+
   desc "Site5 version of restart task."
   task :restart, :roles => :app do
     run "touch #{deploy_to}/current/tmp/restart.txt"
@@ -54,6 +57,11 @@ namespace :site5 do
   desc "#rake db:migrate RAILS_ENV=production"
   task :migrate, :roles => :db do
     #rake db:migrate RAILS_ENV=production
+  end
+
+  task :htaccess_setup, :roles => :app do
+    htaccess = "#{public_html}/.htaccess"
+    run "if [ ! -f #{htaccess} ]; then echo 'PassengerEnabled On' > #{htaccess}; echo 'PassengerAppRoot #{current_path}'; echo '.htaccess created' >> #{htaccess}; else echo '.htaccess already exists (untouched)'; fi"
   end
 
   desc "Set your public_html to point to your project's public directory"
