@@ -61,7 +61,7 @@ namespace :site5 do
 
   task :htaccess_setup, :roles => :app do
     htaccess = "#{public_html}/.htaccess"
-    run "if [ ! -f #{htaccess} ]; then echo 'PassengerEnabled On' > #{htaccess}; echo 'PassengerAppRoot #{current_path}'; echo '.htaccess created' >> #{htaccess}; else echo '.htaccess already exists (untouched)'; fi"
+    run "if [ ! -f #{htaccess} ]; then echo 'PassengerEnabled On' > #{htaccess}; echo 'PassengerAppRoot #{current_path}' >> #{htaccess}; echo '.htaccess created'; else echo '.htaccess already exists (untouched)'; fi"
   end
 
   desc "Set your public_html to point to your project's public directory"
