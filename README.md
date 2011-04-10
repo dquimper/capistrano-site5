@@ -27,8 +27,18 @@ Usage
     The first part of your sub-domain. ex: For myapp.example.com, you only write myapp
 
     `set :repository,  "your git or github url"`
+    `set :deploy_via, :remote_cache`
+    `set :git_shallow_clone, 1`
 
-    It is assumed that the server on which you are deploying has access to your git repository.
+    if your server has direct access to the repository
+
+    `set :deploy_via, :copy`
+
+    If you server does NOT have direct access to the repository (default)
+
+    `set :git_enable_submodules, 1`
+
+    If you have submodules in your project.
 
     `set :user, "your username on the site5 server."`
 
@@ -58,6 +68,9 @@ Example
 ---
     set :application, "myapp"
     set :repository,  "git@github.com:someone/someproject.git"
+    set :deploy_via, :remote_cache
+    set :git_shallow_clone, 1
+    set :git_enable_submodules, 1
     set :user, "username"
     
     server "example.com", :app, :web, :db, :primary => true

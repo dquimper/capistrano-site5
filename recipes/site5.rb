@@ -1,13 +1,6 @@
 set(:deploy_to) { "/home/#{user}/rails/#{application}" }
 set(:public_html) { "/home/#{user}/public_html/#{application}"}
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-set :scm, :git
-set :deploy_via, :remote_cache  # if your server has direct access to the repository
-#set :deploy_via, :copy  # if you server does NOT have direct access to the repository (default)
-set :git_shallow_clone, 1  # only copy the most recent, not the entire repository (default:1)
-
 set :keep_releases, 3  # only keep a current and one previous version to save space
 
 ssh_options[:paranoid] = false
