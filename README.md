@@ -27,6 +27,7 @@ Usage
     The first part of your sub-domain. ex: For myapp.example.com, you only write myapp
 
     `set :repository,  "your git or github url"`
+    `set :scm, :git`
     `set :deploy_via, :remote_cache`
     `set :git_shallow_clone, 1`
 
@@ -68,6 +69,7 @@ Example
 ---
     set :application, "myapp"
     set :repository,  "git@github.com:someone/someproject.git"
+    set :scm, :git
     set :deploy_via, :remote_cache
     set :git_shallow_clone, 1
     set :git_enable_submodules, 1
