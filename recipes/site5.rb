@@ -36,6 +36,7 @@ end
 
 namespace :site5 do
   after "site5:bundle", "site5:migrate"
+  after "site5:migrate", "site5:copy_db_config"
 
   desc "Site5 version of restart task."
   task :restart, :roles => :app do
@@ -45,6 +46,12 @@ namespace :site5 do
   desc "runs bundle install --path vendor/bundle."
   task :bundle, :roles => :app do
     run "cd #{current_path}; bundle install --path vendor/bundle"
+  end
+
+  desc "Copy production database.yml"
+  task :copy_db_config, :roles => :app do
+    prod_db_config = File.expand_path("#{current_path}/../database.yml")
+    run "if [ -r #{prod_db_config} ]; then cp -v #{prod_db_config} #{current_path}/config/database.yml; else echo 'No production database config found'; fi"
   end
 
   desc "#rake db:migrate RAILS_ENV=production"
