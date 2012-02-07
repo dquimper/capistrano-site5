@@ -57,7 +57,7 @@ namespace :site5 do
 
   desc "#rake db:migrate RAILS_ENV=production"
   task :migrate, :roles => :db do
-    rake "db:migrate RAILS_ENV=#{rails_env}"
+    run "cd #{current_path}; bundle exec rake db:migrate RAILS_ENV=#{rails_env}"
   end
 
   task :htaccess_setup, :roles => :app do
