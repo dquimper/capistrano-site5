@@ -45,7 +45,7 @@ namespace :site5 do
 
   desc "runs bundle install --path vendor/bundle."
   task :bundle, :roles => :app do
-    run "cd #{current_path}; bundle install --path vendor/bundle"
+    run "cd #{current_path}; bundle install --path vendor/bundle --without #{["staging", "development", "test", "production"] - [rails_env]}"
   end
 
   desc "Copy production database.yml"
@@ -56,7 +56,7 @@ namespace :site5 do
 
   desc "#rake db:migrate RAILS_ENV=production"
   task :migrate, :roles => :db do
-    #rake db:migrate RAILS_ENV=production
+    rake "db:migrate RAILS_ENV=#{rails_env}"
   end
 
   task :htaccess_setup, :roles => :app do
