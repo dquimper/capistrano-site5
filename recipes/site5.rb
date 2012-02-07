@@ -46,7 +46,7 @@ namespace :site5 do
   desc "runs bundle install --path vendor/bundle."
   task :bundle, :roles => :app do
     envs = ["staging", "development", "test", "production"] - [rails_env]
-    run "cd #{current_path}; bundle install --path vendor/bundle --without #{envs.to_s}"
+    run "cd #{current_path}; bundle install --path vendor/bundle --without #{envs.join(" ")}"
   end
 
   desc "Copy production database.yml"
