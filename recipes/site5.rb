@@ -14,6 +14,10 @@ default_run_options[:pty] = true
 set :runner, nil
 set :rails_env, "production"
 
+def rake(cmd)
+  run "cd #{current_path} && bundle exec rake #{cmd}"
+end
+
 # One other thing that I had problems with (though may not be related to the situation you're having)
 # is the set_permissions task in the latest capistrano. It sets g+w on the entire release directory
 # which is bad on a shared host (and also causes fcgi processes to fail). To workaround this you can
