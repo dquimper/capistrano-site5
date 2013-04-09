@@ -14,7 +14,7 @@ Rails 3.x
 
 Add this to your Gemfile.
 
-	gem 'capistrano-site5' :git => "git@github.com:dquimper/capistrano-site5.git"
+	gem 'capistrano-site5', :git => "git@github.com:dquimper/capistrano-site5.git"
 
 
 Usage
